@@ -1,0 +1,52 @@
+cabal-version:       3.0
+-- For further documentation, see http://haskell.org/cabal/users-guide/
+
+name:                bintree
+version:             0.1.0
+-- synopsis:
+-- description:
+-- bug-reports:
+-- license:
+-- license-file:        LICENSE
+author:              Stefan Klinger
+maintainer:          git@stefan-klinger.de
+-- copyright:
+-- category:
+build-type:          Simple
+-- extra-source-files:  CHANGELOG.md
+
+
+common shared-properties
+  default-language:    Haskell2010
+  default-extensions:  BangPatterns
+                     , ScopedTypeVariables
+                     , OverloadedStrings
+
+  -- see [1] for warnings
+  ghc-options:         -Wall -Werror
+                       -Wunused-imports -Wunused-top-binds
+
+  build-depends:       base
+                     , deepseq
+
+library
+  import:              shared-properties
+  hs-source-dirs:      src
+
+  exposed-modules:     BinTree
+
+
+
+test-suite quickcheck
+  import:              shared-properties
+  type:                exitcode-stdio-1.0
+
+  hs-source-dirs:      test
+  main-is:             quickcheck.hs
+
+  build-depends:       bintree
+                     , QuickCheck
+
+
+
+-- [1]: https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/using-warnings.html
